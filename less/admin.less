@@ -1,0 +1,182 @@
+.RecycleBin {
+    padding-top: 0px !important;
+    margin-top: 0 !important;
+
+    .RecycleBin-menu {
+        background: @control-bg;
+        margin-bottom: 0px;
+    
+        .Button {
+            padding: 12px 13px;
+            border-radius: 0;
+
+            &.item-selected {
+            background: darken(@control-bg, 10%);
+            }
+        }
+    }
+
+    .RecycleBin-container {
+        margin: 0;
+
+        .ExtensionPage-settings {
+            margin-top: 0px !important;
+            padding: 0 !important;
+        }
+    }
+}
+
+
+
+.RecycleBinPage {
+    // Pad bottom of page to make nav area look less squashed
+    padding-bottom: 24px;
+
+    &-header {
+        margin-bottom: 16px;
+    }
+
+    &-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        *+* {
+            margin-left: 8px;
+        }
+    }
+
+    &-grid {
+        width: 100%;
+        position: relative;
+        border-radius: var(--border-radius);
+
+        // Use CSS custom properties to define the number of columns in the grid
+        grid-template-columns: repeat(var(--columns), max-content);
+
+        // Ensure mobile scrollbar isn't on top of content
+        padding-bottom: 4px;
+
+        // Table refreshing overlay
+        &--loadingPage {
+            &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(128, 128, 128, 0.2);
+            }
+
+            .LoadingIndicator-container {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        &--loaded,
+        &--loadingPage {
+            display: grid;
+            overflow-x: auto;
+        }
+
+        &-header {
+            font-weight: bold;
+            border-bottom: 1px solid var(--muted-more-color);
+            padding: 8px 16px;
+            background: var(--control-bg);
+        }
+
+        &-rowItem {
+            padding: 4px 16px;
+            display: flex;
+            align-items: center;
+
+            &[data-column-name="actions"] {
+                padding: 1px 0;
+                position: relative;
+            }
+
+            &--shaded {
+                background: var(--body-bg-shaded);
+
+                & when (@config-dark-mode = true) {
+                    background: var(--body-bg-light);
+                }
+            }
+        }
+    }
+
+    &-totalDiscussions {
+        margin-top: 10px;
+    }
+
+    &-gridPagination {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto auto;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+    }
+
+    &-pageNumber {
+        text-align: center;
+    }
+
+    &-pageNumberInput {
+        display: inline-block;
+        margin: 0 8px;
+        width: auto;
+        max-width: 80px;
+    }
+
+    &-massActions {
+        padding: 5px 0;
+    }
+
+    &-massActions button {
+        margin-right: 5px;
+    }
+}
+
+// Handles styling of default DiscussionList columns
+.DiscussionList {
+    &-creationDate, &-hiddenDate {
+        cursor: help;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+    }
+
+    &-editModalBtn {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 0;
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &-editModalBtn:first-child {
+        margin-right: 3px;
+    }
+
+}
+
+.RestorePostModal, .DeletePostModal {
+    pre code {
+        background-color: var(--code-bg);
+        display: block;
+        width: 100%;
+        text-wrap: auto;
+        padding: 5px;
+        border-radius: var(--border-radius);
+    }
+}
